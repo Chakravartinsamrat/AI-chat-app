@@ -112,9 +112,12 @@
   }
 
   .text-field-wrapper:focus-within .label-text,
-  .text-field-wrapper .text-field:not(:placeholder-shown) + .label-text {
+  .text-field-wrapper .text-field:not(:placeholder-shown) + .label-text,
+  .text-field-wrapper .text-field:not([value='']) + .label-text { /* Added condition */
     @apply translate-x-0.5 -translate-y-7 scale-[0.85];
   }
+  
+
 
   .text-field-wrapper:focus-within .label-text{
     @apply text-light-primary
@@ -138,6 +141,8 @@
     rounded-full
     text-labelLarge
     px-4
+    justify-center
+    gap-2
     transition-shadow
     duration-short3
     ease-standard
@@ -206,6 +211,28 @@
       hover:underline;
     }
 }
+
+
+/* progress bar */
+.circular-progress{
+  @apply border-4
+  border-current
+  border-r-transparent
+  dark:border-current
+  dark:border-r-transparent
+  rounded-full
+  w-12
+  h-12
+  animate-spin;
+}
+
+.circular-progress.small{
+  @apply border-[3px]
+  w-5
+  h-5;
+}
+
+
 
 /* utilities */
 @layer utilities {

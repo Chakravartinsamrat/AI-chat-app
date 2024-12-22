@@ -1,10 +1,18 @@
 import React from 'react';
+import { Link, Form, useNavigation } from 'react-router-dom';
+
+
 import PageTitle from '../components/PageTitle';
-import { Link, Form } from 'react-router-dom';
 import { logoLight, logoDark, banner } from '../assets/assets';
 import TextField from '../components/TextField';
 import { Button } from '../components/Button';
+import { CircularProgress } from '../components/Progress';
+
+
 const Register = () => {
+  //get navigation from submitting and loading
+  const navigation = useNavigation();
+
   return (
     <>
       <PageTitle title='Create and Account' />
@@ -48,7 +56,6 @@ const Register = () => {
                 placeholder='Full name'
                 required={true}
                 autoFocus={true}
-                helperText='some helper text'
               />
               <TextField
                 type='email'
@@ -64,13 +71,29 @@ const Register = () => {
                 placeholder='Enter your password'
                 required={true}
               ></TextField>
-              <Button type='submit'>Create Account</Button>
+              <Button
+                type='submit'
+                disabled={navigation.state === 'submitting'}
+              >
+                <CircularProgress size='small' />
+                {navigation.state === 'submitting'
+                  ? <CircularProgress size='small' />
+                  : 'Create Account'}
+              </Button>
             </Form>
             <p className='text-bodyMedium text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant text-center'>
-              Already have an account? <Link to='/login' className='link inline-block ms-1 text-light-onSurface dark:text-dark-onSurface'>Sign in</Link>
+              Already have an account?{' '}
+              <Link
+                to='/login'
+                className='link inline-block ms-1 text-light-onSurface dark:text-dark-onSurface'
+              >
+                Sign in
+              </Link>
             </p>
           </div>
-          <p className='mt-auto mx-auto text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant text-bodyMedium lg:mx-0'>&copy; 2021 SynChat. All rights reserved.</p>
+          <p className='mt-auto mx-auto text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant text-bodyMedium lg:mx-0'>
+            &copy; 2021 SynChat. All rights reserved.
+          </p>
         </div>
 
         <div className='hidden lg:block lg:relative lg:rounded-large img-box'>
@@ -79,7 +102,9 @@ const Register = () => {
             alt='synchat banner'
             className='img-cover'
           />
-          <p className='absolute bottom-10 left-12 right-12 z-10 text-displayLarge font-semibold leading-tight text-right text-light-onSurface drop-shadow-sm 2xl:text-[72px]'>Chat with SynChat to supercharge your ideas.</p>
+          <p className='absolute bottom-10 left-12 right-12 z-10 text-displayLarge font-semibold leading-tight text-right text-light-onSurface drop-shadow-sm 2xl:text-[72px]'>
+            Chat with SynChat to supercharge your ideas.
+          </p>
         </div>
       </div>
     </>

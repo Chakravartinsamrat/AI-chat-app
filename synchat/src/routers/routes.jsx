@@ -1,7 +1,7 @@
 import { createBrowserRouter, createBrowserRouter as createRouter } from "react-router-dom";
 import App from "../App.jsx";
 import Register from "../pages/Register.jsx";
-
+import registerAction from "./actions/registerActions.js";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -10,7 +10,8 @@ const router = createBrowserRouter([
     },
     {
         path: '/register',
-        element: <Register />
+        element: <Register />,
+        action: registerAction,
     }
 ]);
 
