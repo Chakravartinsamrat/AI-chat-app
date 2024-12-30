@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, Form, useNavigation } from 'react-router-dom';
+import { Link, Form, useNavigation, useActionData } from 'react-router-dom';
 
-
+import { useEffect } from 'react';
 import PageTitle from '../components/PageTitle';
 import { logoLight, logoDark, banner } from '../assets/assets';
 import TextField from '../components/TextField';
@@ -10,8 +10,16 @@ import { CircularProgress } from '../components/Progress';
 
 
 const Register = () => {
+  //get error data from form using useAtciondata
+  const error =  useActionData();
+  console.log(error);
   //get navigation from submitting and loading
   const navigation = useNavigation();
+
+  useEffect(() => {
+//show snackbar with the same error messages
+  }, [error]);
+
 
   return (
     <>
@@ -75,7 +83,7 @@ const Register = () => {
                 type='submit'
                 disabled={navigation.state === 'submitting'}
               >
-                <CircularProgress size='small' />
+                
                 {navigation.state === 'submitting'
                   ? <CircularProgress size='small' />
                   : 'Create Account'}
