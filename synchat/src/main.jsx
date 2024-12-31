@@ -5,8 +5,12 @@ import {RouterProvider} from 'react-router-dom';
 import './index.css';
 import routes from './routers/routes';  
 
+import SnackbarProvider from './contexts/SnackbarContext';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={routes} />
+    <SnackbarProvider>
+      <RouterProvider router={routes} />
+    </SnackbarProvider>
   </StrictMode>,
 )

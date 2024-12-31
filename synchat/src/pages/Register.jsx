@@ -9,6 +9,9 @@ import { Button } from '../components/Button';
 import { CircularProgress } from '../components/Progress';
 
 
+//Custom Hook for Snackbar
+import { useSnackbar } from '../hooks/useSnackbar';
+
 const Register = () => {
   //get error data from form using useAtciondata
   const error =  useActionData();
@@ -16,9 +19,14 @@ const Register = () => {
   //get navigation from submitting and loading
   const navigation = useNavigation();
 
+  const {showSnackBar} = useSnackbar();
+
   useEffect(() => {
 //show snackbar with the same error messages
-  }, [error]);
+    if (error?.message) {
+      showSnackBar({message: error.message, type: 'error'});
+    }
+  }, [error, showSnackBar]);
 
 
   return (

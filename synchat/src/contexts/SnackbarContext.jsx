@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { createContext, useState, useRef, useCallback,useMemo } from "react";
-import PropTypes from 'prop-types';
-
+import Snackbar from "../components/Snackbar";
 const initialCtxValue = {
     snackbar: {
         open: false,
@@ -15,12 +14,29 @@ const initialCtxValue = {
 export const SnackbarContext = createContext(initialCtxValue);
 
 const SnackbarProvider  = ({children}) =>{
-    const [snackbar, ssetSnackbar] = useState({
+    const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         type: 'info',
     });
-    const timeoutRef = useRef()
+    const timeoutRef = useRef();
+
+    const showSnackBar = useCallback(({message, type = 'info', timeOut = 5000 }) =>{
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+        setSnackbar({open:true, message, type});
+
+        timeoutRef.current = setTimeout(() =>{setSnackbar((prev)=> {
+            return { ...prev, open: false };
+        });
+        }, timeOut);
+    },[]);
+
+    //hide snackBar manually if needed
+    const hideSnackBar = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        setSnackbar({open:false, message:'', type:'info'});
+    },[]);
 
     //preventing re renders 
     const contextValue =  useMemo(() =>{
@@ -30,6 +46,7 @@ const SnackbarProvider  = ({children}) =>{
     return (
         <SnackbarContext.Provider value = {contextValue}>
             {children}
+            <Snackbar snackbar={snackbar} />
         </SnackbarContext.Provider>
     )
 };
