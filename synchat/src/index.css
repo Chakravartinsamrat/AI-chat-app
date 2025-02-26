@@ -210,27 +210,83 @@
       hover:dark:text-dark-primary
       hover:underline;
     }
-}
-
-
 /* progress bar */
-.circular-progress{
-  @apply border-4
-  border-current
-  border-r-transparent
-  dark:border-current
-  dark:border-r-transparent
-  rounded-full
-  w-12
-  h-12
-  animate-spin;
+    .circular-progress{
+      @apply border-4
+      border-current
+      border-r-transparent
+      dark:border-current
+      dark:border-r-transparent
+      rounded-full
+      w-12
+      h-12
+      animate-spin;
+    }
+    
+    .circular-progress.small{
+      @apply border-[3px]
+      w-5
+      h-5;
+    }
+
+    .linear-progress{
+      @apply h-1
+      bg-light-secondaryContainer
+      dark:bg-dark-secondaryContainer
+      rounded-full
+      mx-1
+      overflow-hidden
+      origin-top;
+    }
+
+    .linear-progress .active-indicator{
+      @apply h-[inherit]
+      bg-light-primary
+      dark:bg-dark-primary
+      rounded-full
+      origin-right
+      -translate-x-full;
+    }
+
+    /*snackbar*/
+    .snackbar{
+      @apply fixed
+      bottom-4
+      left-4
+      right-4
+      bg-light-inverseSurface
+      dark:bg-dark-inverseSurface
+      text-light-inverseOnSurface
+      dark:text-dark-inverseOnSurface
+      text-bodyMedium
+      rounded-extraSmall
+      shadow-elevation3
+      max-w-[60ch]
+      min-h-12
+      min-w-[36ch]
+      px-4
+      py-[14px]
+      origin-bottom
+      z-40
+      /* responsive */
+      sm:left-6
+      sm:right-auto
+      sm:bottom-6
+      sm:w-max;
+      
+    }
+    .snackbar.error{
+      @apply 
+        bg-light-errorContainer
+        text-light-onErrorContainer
+  
+    }
 }
 
-.circular-progress.small{
-  @apply border-[3px]
-  w-5
-  h-5;
-}
+
+
+
+
 
 
 

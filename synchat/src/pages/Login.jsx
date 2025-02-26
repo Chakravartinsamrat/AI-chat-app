@@ -15,7 +15,7 @@ import { logoLight, logoDark, banner } from '../assets/assets';
 //Custom Hook for Snackbar
 import { useSnackbar } from '../hooks/useSnackbar';
 
-const Register = () => {
+const Login = () => {
   //get error data from form using useAtciondata
   const error = useActionData();
   console.log(error);
@@ -36,7 +36,7 @@ const Register = () => {
 
   return (
     <>
-      <PageTitle title='Create and Account' />
+      <PageTitle title='Login' />
       <div className='relative w-screen h-dvh p-2 grid grid-cols-1 lg:grid-cols-[1fr,1.2fr] lg:gap-2'>
         <div className='flex flex-col p-4'>
           <Link
@@ -61,37 +61,35 @@ const Register = () => {
 
           <div className='flex flex-col gap-2 max-w-[480px] mx-auto w-full'>
             <h2 className='text-displaySmall font-semibold text-light-onBackground dark:text-dark-onBackground text-center'>
-              Create an account
+              Welcome Back To Synchat
             </h2>
             <p className='text-bodyLarge text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant mt-1 mb-5 text-center px-2'>
-              Register to get started with SynChat.
+              Enter Your Account Details
             </p>
             <Form
               method='POST'
               className='grid grid-cols-1 gap-4'
             >
               <TextField
-                type='text'
-                name='name'
-                label='Full name'
-                placeholder='Full name'
-                required={true}
-                autoFocus={true}
-              />
-              <TextField
                 type='email'
                 name='email'
                 label='Email'
                 placeholder='Email'
                 required={true}
-              ></TextField>
+                autoFocus={true}
+              />
               <TextField
                 type='password'
                 name='password'
                 label='Password'
                 placeholder='Enter your password'
                 required={true}
-              ></TextField>
+              />
+
+            <div className='text-right'>
+                <Link to = '/reset-link' className='link text-labelLarge inline-block'>Forgot Password?</Link>
+            </div>
+
               <Button
                 type='submit'
                 disabled={navigation.state === 'submitting'}
@@ -99,17 +97,17 @@ const Register = () => {
                 {navigation.state === 'submitting' ? (
                   <CircularProgress size='small' />
                 ) : (
-                  'Create Account'
+                  'Sign In'
                 )}
               </Button>
             </Form>
             <p className='text-bodyMedium text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant text-center'>
-              Already have an account?{' '}
+              Don&apos;t have an account?
               <Link
-                to='/login'
+                to='/register'
                 className='link text-labelLarge inline-block ms-1 text-light-onSurface dark:text-dark-onSurface'
               >
-                Sign in
+                Create an account
               </Link>
             </p>
           </div>
@@ -138,4 +136,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
