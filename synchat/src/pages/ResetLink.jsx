@@ -15,28 +15,29 @@ import { logoLight, logoDark, banner } from '../assets/assets';
 //Custom Hook for Snackbar
 import { useSnackbar } from '../hooks/useSnackbar';
 
-const Login = () => {
-  //get error data from form using useAtciondata
-  const error = useActionData();
-  console.log(error);
+const ResetLink = () => {
+  //get actionData data from form using useAtciondata
+  const actionData = useActionData();
+  console.log(actionData);
   //get navigation from submitting and loading
   const navigation = useNavigation();
 
   const { showSnackBar } = useSnackbar();
 
   useEffect(() => {
-    //show snackbar with the same error messages
-    if (error?.message) {
+    //show snackbar with the same actionData messages
+    if (actionData) {
       showSnackBar({
-        message: error.message,
-        type: 'error',
+        message: actionData.message,
+        type: actionData.ok ? 'info' : 'error',
+        timeOut: 8000,
       });
     }
-  }, [error, showSnackBar]);
+  }, [actionData, showSnackBar]);
 
   return (
     <>
-      <PageTitle title='Login' />
+      <PageTitle title='Reset password' />
       <div className='relative w-screen h-dvh p-2 grid grid-cols-1 lg:grid-cols-[1fr,1.2fr] lg:gap-2'>
         <div className='flex flex-col p-4'>
           <Link
@@ -61,34 +62,24 @@ const Login = () => {
 
           <div className='flex flex-col gap-2 max-w-[480px] mx-auto w-full'>
             <h2 className='text-displaySmall font-semibold text-light-onBackground dark:text-dark-onBackground text-center'>
-              Welcome Back To Synchat
+              Forgot your password?
             </h2>
             <p className='text-bodyLarge text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant mt-1 mb-5 text-center px-2'>
-              Enter Your Account Details
+              Enter your email and we&apos;ll send you a link to reset your password.
             </p>
             <Form
               method='POST'
-              className='grid grid-cols-1 gap-4'
+              className='grid grid-cols-1 gap-4 text-center'
             >
               <TextField
                 type='email'
                 name='email'
                 label='Email'
                 placeholder='Email'
+                helperText="The verification link sent to your email will expire in 1 hour!"
                 required={true}
                 autoFocus={true}
               />
-              <TextField
-                type='password'
-                name='password'
-                label='Password'
-                placeholder='Enter your password'
-                required={true}
-              />
-
-            <div className='text-right'>
-                <Link to = '/reset-link' className='link text-labelLarge inline-block'>Forgot Password?</Link>
-            </div>
 
               <Button
                 type='submit'
@@ -97,19 +88,11 @@ const Login = () => {
                 {navigation.state === 'submitting' ? (
                   <CircularProgress size='small' />
                 ) : (
-                  'Sign In'
+                  'Get reset link'
                 )}
               </Button>
             </Form>
-            <p className='text-bodyMedium text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant text-center'>
-              Don&apos;t have an account?
-              <Link
-                to='/register'
-                className='link text-labelLarge inline-block ms-1 text-light-onSurface dark:text-dark-onSurface'
-              >
-                Create an account
-              </Link>
-            </p>
+            
           </div>
           <p className='mt-auto mx-auto text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant text-bodyMedium lg:mx-0'>
             &copy; 2025 Piyush.C. All rights reserved.
@@ -136,4 +119,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetLink;
