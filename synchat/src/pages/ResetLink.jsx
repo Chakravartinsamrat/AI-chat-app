@@ -6,11 +6,13 @@ import PageTitle from '../components/PageTitle';
 import TextField from '../components/TextField';
 import { Button } from '../components/Button';
 import { CircularProgress, LinearProgress } from '../components/Progress';
+import Logo from '../components/Logo';
+
 //animation
 import { AnimatePresence } from 'framer-motion';
 
 //assests
-import { logoLight, logoDark, banner } from '../assets/assets';
+import {  banner } from '../assets/assets';
 
 //Custom Hook for Snackbar
 import { useSnackbar } from '../hooks/useSnackbar';
@@ -40,9 +42,10 @@ const ResetLink = () => {
       <PageTitle title='Reset password' />
       <div className='relative w-screen h-dvh p-2 grid grid-cols-1 lg:grid-cols-[1fr,1.2fr] lg:gap-2'>
         <div className='flex flex-col p-4'>
-          <Link
+          <Logo classes='mb-auto sm:mx-auto lg:mx-0'/>
+          {/* <Link
             to='/'
-            className='max-w-max mb-auto sm:mx-auto lg:mx-0'
+            className='max-w-max '
           >
             <img
               src={logoLight}
@@ -58,7 +61,7 @@ const ResetLink = () => {
               height={24}
               className='hidden dark:block'
             />
-          </Link>
+          </Link> */}
 
           <div className='flex flex-col gap-2 max-w-[480px] mx-auto w-full'>
             <h2 className='text-displaySmall font-semibold text-light-onBackground dark:text-dark-onBackground text-center'>

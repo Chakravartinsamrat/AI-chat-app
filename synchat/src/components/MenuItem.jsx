@@ -13,7 +13,7 @@ const MenuItem = ({classes='', labelText, ...rest}) => {
 }
 
 
-Menu.propTypes={
+MenuItem.propTypes={
     classes: PropTypes.string,
     labelText: PropTypes.string,
 }
