@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server:{
     port:3000
-  }
+  },
+  // define: {
+  //   'import.meta.env.VITE_GEMINI_API_KEY': JSON.stringify(process.env.VITE_GEMINI_API_KEY)
+  // },
+  define: {
+    'process.env': {},
+  },
 })

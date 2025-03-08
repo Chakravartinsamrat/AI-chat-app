@@ -25,7 +25,7 @@ const TopAppBar = ({toggleSidebar}) => {
     const navigation = useNavigation();
     const navigate = useNavigate();
     const {user} = useLoaderData();
-    console.log(user);
+    
     const [showMenu,setShowMenu] = useToggle();
 
     const isNormalLoad = navigation.state === 'loading' && !navigation.formData;
@@ -66,7 +66,7 @@ const TopAppBar = ({toggleSidebar}) => {
             </Menu>
         </div>
         <AnimatePresence>
-        {isNormalLoad && <LinearProgress/>}
+        {isNormalLoad && <LinearProgress classes='absolute top-full left-0 right-0 z-10'/>}
         </AnimatePresence>
     </header>
   );

@@ -1,5 +1,6 @@
 //anims
 import { motion } from 'framer-motion';
+import { Outlet, useParams } from 'react-router-dom';
 
 //components
 import PageTitle from './components/PageTitle';
@@ -10,7 +11,12 @@ import PromptField from './components/PromptField';
 import { useToggle } from './hooks/useToggle';
 //pages
 import Greetings from './pages/Greetings';
+
+
 const App = () => {
+
+  const params = useParams();
+
   const [isSidebarOpen, toggleSidebar] = useToggle();
   return (
     <>
@@ -30,7 +36,12 @@ const App = () => {
           {/*main Content*/}
           <div className='px-5 pb-5 flex flex-col overflow-y-auto'>
             <div className='max-w-[840px] w-full mx-auto grow '>
-              <Greetings />
+              {params.conversationId ? (
+                <Outlet/>
+              ):
+              (<Greetings />
+              )}
+              
             </div>
           </div>
           {/*Prompt Field*/}
