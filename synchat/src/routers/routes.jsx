@@ -12,7 +12,7 @@ import RootError from "../pages/RootError.jsx";
 //actions
 import registerAction from "./actions/registerActions.js";
 import loginAction from "./actions/loginAction.js";
-import resetLinkAction from "./actions/resetlinkAction.js";
+import resetLinkAction from "./actions/resetLinkAction.js";
 import resetPasswordAction from "./actions/resetPasswordAction.js";
 import appAction from "./actions/appAction.js";
 import conversationAction from "./actions/conversationAction.js";
