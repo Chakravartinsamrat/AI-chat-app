@@ -1,6 +1,7 @@
 //anims
 import { motion } from 'framer-motion';
-import { Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { Outlet, useParams, useNavigation, useActionData } from 'react-router-dom';
 
 //components
 import PageTitle from './components/PageTitle';
@@ -9,6 +10,9 @@ import SideBar from './components/SideBar';
 import PromptField from './components/PromptField';
 //custom hooks
 import { useToggle } from './hooks/useToggle';
+import { useSnackbar } from './hooks/useSnackbar';
+import { userPromptPreloader } from './hooks/userPromptPreloader';
+
 //pages
 import Greetings from './pages/Greetings';
 
@@ -17,7 +21,37 @@ const App = () => {
 
   const params = useParams();
 
+  const navigation = useNavigation();
+
+  const actionData = useActionData();
+
+  const chatHistoryRef = useRef();
+
   const [isSidebarOpen, toggleSidebar] = useToggle();
+
+  const {promptPreloaderValue} = userPromptPreloader();
+
+  const {showSnackBar} = useSnackbar();
+
+  useEffect(()=>{
+    const chatHistory = chatHistoryRef.current;
+    if (promptPreloaderValue){
+      chatHistory.scroll({
+        top:chatHistory.scrollHeight - chatHistory.clientHeight,
+        behavior:'smooth'
+      });
+    }
+  },[chatHistoryRef, promptPreloaderValue]);
+
+  useEffect(()=>{
+    if(actionData?.conversationTitle){
+      showSnackBar({
+        message:`Deleted '${actionData.conversationTitle}'conversation.`
+      });
+    }
+  },[actionData, showSnackBar]);
+
+  const isNormalLoad = navigation.state === 'loading' && !navigation.formData;
   return (
     <>
       {/*Meta Title*/}
@@ -34,9 +68,9 @@ const App = () => {
           <TopAppBar toggleSidebar={toggleSidebar} />
 
           {/*main Content*/}
-          <div className='px-5 pb-5 flex flex-col overflow-y-auto'>
+          <div ref={chatHistoryRef} className='px-5 pb-5 flex flex-col overflow-y-auto'>
             <div className='max-w-[840px] w-full mx-auto grow '>
-              {params.conversationId ? (
+              { isNormalLoad? null : params.conversationId ? (
                 <Outlet/>
               ):
               (<Greetings />

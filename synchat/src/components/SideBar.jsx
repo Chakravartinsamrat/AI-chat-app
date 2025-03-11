@@ -1,17 +1,24 @@
 //Node Modules
 import PropTypes from 'prop-types';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { NavLink, useLoaderData, useSubmit, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 //components
 import { ExtendedFab } from './Button';
 import Logo from './Logo';
 import { IconBtn } from './Button';
+import deleteConversation from '../utils/deleteConversation';
+
 
 const SideBar = ({ isSidebarOpen, toggleSidebar }) => {
   const {
-    conversation: { documents: conversationData },
+    conversations: { documents: conversationData },
   } = useLoaderData() || {};
+
+  const {conversationId} = useParams();
+
+const submit = useSubmit();
+
 
   return (
     <>
@@ -31,6 +38,7 @@ const SideBar = ({ isSidebarOpen, toggleSidebar }) => {
             text='New Chat'
             classes=''
             onClick={toggleSidebar}
+            disabled={!conversationId}
           />
 
           <div className='overflow-y-auto -me-2 pe-1 mt-4'>
@@ -66,6 +74,13 @@ const SideBar = ({ isSidebarOpen, toggleSidebar }) => {
                               hidden 
                               lg:grid'
                     title='Delete'
+                    onClick={()=>{
+                      deleteConversation({
+                        id:item.$id,
+                        title:item.title,
+                        submit,
+                      });
+                    }}
                   />
                 </div>
               ))}

@@ -1,5 +1,5 @@
 //modules
-import {Link, useNavigation, useNavigate, useLoaderData} from 'react-router-dom';
+import {Link, useNavigation, useNavigate, useLoaderData, useParams, useSubmit} from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 //import Components
@@ -18,13 +18,23 @@ import { useToggle } from '../hooks/useToggle';
 
 //utils
 import logout from '../utils/logout';
+import deleteConversation from '../utils/deleteConversation';
+
 
 //agar formdata nahi hai toh loading state dikha do
 //agar formdata hai toh normal state dikha do
 const TopAppBar = ({toggleSidebar}) => {
     const navigation = useNavigation();
     const navigate = useNavigate();
-    const {user} = useLoaderData();
+
+
+    const {conversations,user} = useLoaderData();
+
+
+//params object contains URL parameters, incl conversationID
+    const params = useParams();
+
+    const submit = useSubmit();
     
     const [showMenu,setShowMenu] = useToggle();
 
@@ -56,6 +66,26 @@ const TopAppBar = ({toggleSidebar}) => {
                 />
             </Link> */}
         </div>
+        
+        {params.conversationId &&(
+            <IconBtn
+            icon='delete'
+            classes='ms-auto me-1 lg:hidden'
+            onClick={() =>{
+                
+                const {title} = conversations.documents.find(
+                    ({$id}) => params.conversationId === $id,
+                );
+                
+                deleteConversation({
+                    id:params.conversationId,
+                    title,
+                    submit
+                })
+            }}
+            />
+        )}
+
 
         <div className="menu-wrapper">
             <IconBtn onClick={setShowMenu}>

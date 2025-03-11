@@ -15,7 +15,7 @@ const appLoader = async () => {
   }
 
   try {
-    data.conversation = await databases.listDocuments(
+    data.conversations = await databases.listDocuments(
       import.meta.env.VITE_APPWRITE_DATABASE_ID,
       'conversations',
       [Query.select(['$id', 'title']),
@@ -23,7 +23,7 @@ const appLoader = async () => {
         Query.equal('user_id',data.user.$id),        
       ],
     );
-    console.log(data);
+    // console.log(data);
   } catch (err) {
     console.log(`Error getting conversations: ${err.message}`);
   }

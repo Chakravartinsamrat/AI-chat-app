@@ -7,13 +7,15 @@ import Login from "../pages/Login.jsx";
 import ResetLink from "../pages/ResetLink.jsx";
 import ResetPassword from "../pages/ResetPassword.jsx";
 import Conversation from "../pages/Conversation.jsx";
+import ConversationError from "../pages/ConversationError.jsx";
+import RootError from "../pages/RootError.jsx";
 //actions
 import registerAction from "./actions/registerActions.js";
 import loginAction from "./actions/loginAction.js";
 import resetLinkAction from "./actions/resetlinkAction.js";
 import resetPasswordAction from "./actions/resetPasswordAction.js";
 import appAction from "./actions/appAction.js";
-
+import conversationAction from "./actions/conversationAction.js";
 //loaders
 import registerLoader from "./loaders/registerLoader.js";
 import loginLoader from "./loaders/loginLoader.js";
@@ -28,11 +30,14 @@ const router = createBrowserRouter([
         element: <App />,
         loader: appLoader,
         action: appAction,
+        errorElement: <RootError/>,
         children: [
             {
             path: '/:conversationId',
             element:<Conversation />,
             loader: conversationLoader,
+            action: conversationAction,
+            errorElement: <ConversationError/>
             }
         ]
     },

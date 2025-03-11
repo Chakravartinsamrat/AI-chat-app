@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useRef, useCallback, useState } from 'react';
-import { useNavigation, useSubmit } from 'react-router-dom';
+import { useNavigation, useSubmit, useParams } from 'react-router-dom';
 
 
 //components
@@ -17,6 +17,10 @@ const PromptField = () => {
   //INITIAL navigation fro checking state
 
   const navigation = useNavigation();
+
+  const {conversationId } = useParams();
+
+
   //state for input field
   const [placeholderShown, setPlaceholderShown] = useState(true);
   const [isMultiline, setMultiline] = useState(false);
@@ -71,14 +75,14 @@ const PromptField = () => {
       {
         method:'POST',
         encType:'application/x-www-form-urlencoded',
-        action:'/',
+        action: `/${conversationId || ''}`,
       }
     );
 
 
     inputField.current.innerHTML = '';
     handleInputChange();
-  }, [handleInputChange, inputValue, navigation.state, submit]);
+  }, [handleInputChange, inputValue, navigation.state, submit, conversationId]);
 
 
   

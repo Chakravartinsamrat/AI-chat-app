@@ -2,12 +2,24 @@ import PropTypes from "prop-types";
 import { useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
 
+//hooks
+import { userPromptPreloader } from "../hooks/userPromptPreloader";
+//components
+import PromptPreloader from "../components/PromptPreloader";
+
 
 const Greetings = () => {
     const {user} = useLoaderData();
 
+    const {promptPreloaderValue}  = userPromptPreloader();
+
   return (
-    <div className="grid place-content-center h-full">
+
+    <>
+      {promptPreloaderValue ?(
+        <PromptPreloader promptValue={promptPreloaderValue}/>
+      ):(
+        <div className="grid place-content-center h-full">
         <h2 className="text-headlineLarge font-semibold text-center tracking-tight text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant">
             <motion.span 
             initial={{backgroundPositionX:'100%'}}
@@ -23,6 +35,9 @@ const Greetings = () => {
             >How can I help you?</motion.span>
         </h2>
     </div>
+      )}
+    </>
+    
   );
 };
 
