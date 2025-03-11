@@ -1,4 +1,4 @@
-import { form } from "motion/react-client";
+
 import {account} from "../../lib/appwrite";
 import generateID from "../../utils/generateID";
 import { redirect } from "react-router-dom";
