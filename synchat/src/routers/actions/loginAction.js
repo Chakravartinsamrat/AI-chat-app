@@ -2,7 +2,7 @@
 import {redirect} from 'react-router-dom';
 //custom
 import {account} from '../../lib/appwrite';
-import router from '../routes';
+
 
 
 

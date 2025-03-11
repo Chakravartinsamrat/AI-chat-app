@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 import { motion } from 'framer-motion';
 import { useRef, useCallback, useState } from 'react';
 import { useNavigation, useSubmit, useParams } from 'react-router-dom';

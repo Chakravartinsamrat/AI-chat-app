@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { delay, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const CircularProgress = ({ classes = '', size = '' }) => {
   return (

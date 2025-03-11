@@ -1,6 +1,6 @@
 //anims
 import { motion } from 'framer-motion';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Outlet, useParams, useNavigation, useActionData } from 'react-router-dom';
 
 //components
