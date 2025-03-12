@@ -4,7 +4,7 @@ import model from "../lib/googleAi";
 const getConversationTitle= async(userPrompt) =>{
     try{
         const result = await model.generateContent(
-            `Given a user Prompt, generate a concise and informative title that accurately describes the conversation. Consider keywords, topics, and overall intent of the prompt, Response in plain Text format, no Markdown.'
+            `Your Name is "SynChat".Given a user Prompt, generate a concise and informative title that accurately describes the conversation. Consider keywords, topics, and overall intent of the prompt, Response in plain Text format, no Markdown.'
 
             Prompt:${userPrompt}`,
         );
